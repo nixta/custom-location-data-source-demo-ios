@@ -17,6 +17,9 @@
 		D9812A982274CAEE00494AA2 /* ArcGIS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9812A962274CAEE00494AA2 /* ArcGIS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9812A9B2274CAF900494AA2 /* ISSLocationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9812A9A2274CAF900494AA2 /* ISSLocationDataSource.swift */; };
 		D9812A9D227512EC00494AA2 /* UIImage+Noir.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9812A9C227512EC00494AA2 /* UIImage+Noir.swift */; };
+		D9854B6C2285A141006D62C7 /* ISSLocation+ISSLocationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9854B6B2285A141006D62C7 /* ISSLocation+ISSLocationDataSource.swift */; };
+		D9854B6E2285A1B1006D62C7 /* ISSLocation+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9854B6D2285A1B1006D62C7 /* ISSLocation+Decodable.swift */; };
+		D9854B702285AD41006D62C7 /* DispatchGroup+NotifyWithTimeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9854B6F2285AD41006D62C7 /* DispatchGroup+NotifyWithTimeout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +48,9 @@
 		D9812A962274CAEE00494AA2 /* ArcGIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ArcGIS.framework; path = $HOME/Library/SDKs/ArcGIS/iOS/Frameworks/Dynamic/ArcGIS.framework; sourceTree = "<absolute>"; };
 		D9812A9A2274CAF900494AA2 /* ISSLocationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISSLocationDataSource.swift; sourceTree = "<group>"; };
 		D9812A9C227512EC00494AA2 /* UIImage+Noir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Noir.swift"; sourceTree = "<group>"; };
+		D9854B6B2285A141006D62C7 /* ISSLocation+ISSLocationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISSLocation+ISSLocationDataSource.swift"; sourceTree = "<group>"; };
+		D9854B6D2285A1B1006D62C7 /* ISSLocation+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISSLocation+Decodable.swift"; sourceTree = "<group>"; };
+		D9854B6F2285AD41006D62C7 /* DispatchGroup+NotifyWithTimeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchGroup+NotifyWithTimeout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +89,10 @@
 				D9812A862274CAA700494AA2 /* ISSTrackerViewController.swift */,
 				D9812A9A2274CAF900494AA2 /* ISSLocationDataSource.swift */,
 				D90B9D192282268300062704 /* ISSLocation.swift */,
+				D9854B6D2285A1B1006D62C7 /* ISSLocation+Decodable.swift */,
+				D9854B6B2285A141006D62C7 /* ISSLocation+ISSLocationDataSource.swift */,
 				D9812A9C227512EC00494AA2 /* UIImage+Noir.swift */,
+				D9854B6F2285AD41006D62C7 /* DispatchGroup+NotifyWithTimeout.swift */,
 				D9812A882274CAA700494AA2 /* Main.storyboard */,
 				D9812A8B2274CAA900494AA2 /* Assets.xcassets */,
 				D9812A8D2274CAA900494AA2 /* LaunchScreen.storyboard */,
@@ -164,8 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9854B6C2285A141006D62C7 /* ISSLocation+ISSLocationDataSource.swift in Sources */,
 				D90B9D1A2282268300062704 /* ISSLocation.swift in Sources */,
 				D9812A872274CAA700494AA2 /* ISSTrackerViewController.swift in Sources */,
+				D9854B6E2285A1B1006D62C7 /* ISSLocation+Decodable.swift in Sources */,
+				D9854B702285AD41006D62C7 /* DispatchGroup+NotifyWithTimeout.swift in Sources */,
 				D9812A9D227512EC00494AA2 /* UIImage+Noir.swift in Sources */,
 				D9812A9B2274CAF900494AA2 /* ISSLocationDataSource.swift in Sources */,
 				D9812A852274CAA700494AA2 /* AppDelegate.swift in Sources */,

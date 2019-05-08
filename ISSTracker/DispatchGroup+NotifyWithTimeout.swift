@@ -15,9 +15,17 @@
 //
 
 import Foundation
-import ArcGIS
 
-struct ISSLocation {
-    let timestamp: Date
-    let position: AGSPoint
+extension DispatchGroup {
+    func notify(timeout: DispatchTime, queue: DispatchQueue, execute: @escaping (DispatchTimeoutResult) -> Void) {
+        DispatchQueue.global(qos: .default).async { [weak self] in
+            guard let self = self else { return }
+            
+            let result = self.wait(timeout: timeout)
+            
+            queue.sync {
+                execute(result)
+            }
+        }
+    }
 }

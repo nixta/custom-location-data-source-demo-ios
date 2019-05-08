@@ -35,10 +35,11 @@ class ISSLocationDataSource: AGSLocationDataSource {
         // Clear any error tracking. `errorCountForFailure` errors in a row will cause API requests to stop being sent.
         errors.removeAll()
 
-        requestInitialLocation()
-
         // MARK: TO AGSLocationDisplay: data source started OK.
         didStartOrFailWithError(nil)
+
+        // Start the locations feed
+        requestInitialLocation()
     }
     
     // MARK: FROM AGSLocationDisplay: stop AGSLocationDataSource.
@@ -51,28 +52,27 @@ class ISSLocationDataSource: AGSLocationDataSource {
     
     // MARK: -
     func requestInitialLocation() {
-        let startingGroup = DispatchGroup()
+        let initialLocationsGroup = DispatchGroup()
         
         // Get an initial location.
-        startingGroup.enter()
-        requestNextLocation { [weak self] initialISSLocation in
+        initialLocationsGroup.enter()
+        getNextLocation { [weak self] initialISSLocation in
             // MARK: TO AGSLocationDisplay: initial location available.
             self?.didUpdate(initialISSLocation)
-            startingGroup.leave()
-        }
-
-        // Get another location in 1.5 seconds to quickly set the heading.
-        startingGroup.enter()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            self?.requestNextLocation { newISSLocation in
-                // MARK: TO AGSLocationDisplay: second location available.
-                self?.didUpdate(newISSLocation)
-                startingGroup.leave()
+            
+            // Get another location in 1.5 seconds to quickly set the heading.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self?.getNextLocation { newISSLocation in
+                    // MARK: TO AGSLocationDisplay: second location available.
+                    self?.didUpdate(newISSLocation)
+                    initialLocationsGroup.leave()
+                }
             }
         }
         
-        startingGroup.notify(queue: DispatchQueue.main) { [weak self] in
+        initialLocationsGroup.notify(timeout: .now() + 10, queue: .main) { [weak self] _ in
             // Once the first two locations have returned, start asking for more.
+            // This will also start asking for locations if nothing came back for 10 seconds.
             self?.startRequestingLocationUpdates()
         }
     }
@@ -85,7 +85,7 @@ class ISSLocationDataSource: AGSLocationDataSource {
             [weak self] _ in
             
             // Request the next ISS location from the API and build an AGSLocation.
-            self?.requestNextLocation { newISSLocation in
+            self?.getNextLocation { newISSLocation in
                 
                 // MARK: TO AGSLocationDisplay: new location available.
                 self?.didUpdate(newISSLocation)
@@ -105,13 +105,13 @@ class ISSLocationDataSource: AGSLocationDataSource {
     
     //MARK: - ISS Location API
     enum ISSAPIError : Error {
-        case invalidJSON
+        case noData
     }
     
     //MARK: Make a request for the current location
     var locationRequestsQueue: AGSOperationQueue = {
         let q = AGSOperationQueue()
-        q.qualityOfService = .userInteractive
+        q.qualityOfService = .userInitiated
         q.maxConcurrentOperationCount = 1
         return q
     }()
@@ -119,7 +119,7 @@ class ISSLocationDataSource: AGSLocationDataSource {
     /// Make a request to the ISS Tracking API and return an AGSLocation.
     ///
     /// - Parameter completion: The completion closure is called when the AGSLocation has been obtained.
-    func requestNextLocation(completion: @escaping (AGSLocation) -> Void) {
+    func getNextLocation(completion: @escaping (AGSLocation) -> Void) {
         let locationRequest = AGSRequestOperation(url: issLocationAPIURL)
         
         locationRequest.registerListener(self) { [weak self] (data, error) in
@@ -135,21 +135,34 @@ class ISSLocationDataSource: AGSLocationDataSource {
             }
 
             // Get the JSON.
-            guard let data = data as? Data,
-                let issLocationFromAPI = try? JSONDecoder().decode(ISSLocation.self, from: data) else {
-                    print("Unable to parse JSON!")
-                    self.handleError(error: ISSAPIError.invalidJSON)
-                    return
+            guard let data = data as? Data else {
+                self.handleError(error: ISSAPIError.noData)
+                return
             }
             
-            /// 2. Now turn the response into an AGSLocation to be used by an AGSLocationDisplay.
-            let location = issLocationFromAPI.agsLocation(consideringPrevious: self.previousLocation)
-            
-            completion(location)
+            // Decode the JSON into an ISSLocation
+            switch Result(catching: { try JSONDecoder().decode(ISSLocation.self, from: data) }) {
 
-            // Remember this as the previous location so that we can calculate velocity and heading
-            // when we get the next location back.
-            self.previousLocation = location
+            case .success(let issLocationFromAPI):
+
+                /// 2. Now turn the ISSLocation into an AGSLocation to be used by an AGSLocationDisplay.
+                let location = issLocationFromAPI.agsLocation(consideringPrevious: self.previousLocation)
+                
+                completion(location)
+                
+                // Remember this as the previous location so that we can calculate velocity and heading
+                // when we get the next location back.
+                self.previousLocation = location
+                
+                // Reset error counting.
+                self.errors.removeAll()
+
+            case .failure(let error):
+
+                // Use the specific JSON Decoding error
+                self.handleError(error: error)
+
+            }
         }
         
         // Send the JSON request to get the ISS position.
