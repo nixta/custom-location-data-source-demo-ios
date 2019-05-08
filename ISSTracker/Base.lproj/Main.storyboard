@@ -22,47 +22,18 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MfU-A4-ciA" userLabel="Overview Map" customClass="AGSMapView">
-                                <rect key="frame" x="186.33333333333337" y="63.999999999999986" width="168.66666666666663" height="168.66666666666663"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="MfU-A4-ciA" secondAttribute="height" multiplier="1:1" id="67D-gR-y5G"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pwd-tK-6yh" secondAttribute="trailing" id="0Ky-hd-DIO"/>
-                            <constraint firstItem="MfU-A4-ciA" firstAttribute="height" secondItem="pwd-tK-6yh" secondAttribute="height" multiplier="0.45" id="2oc-St-9Jb"/>
-                            <constraint firstItem="MfU-A4-ciA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9sY-3l-0dE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pwd-tK-6yh" secondAttribute="bottom" id="CtQ-u4-Gcr"/>
-                            <constraint firstItem="MfU-A4-ciA" firstAttribute="width" secondItem="pwd-tK-6yh" secondAttribute="width" multiplier="0.45" id="IZW-Pc-fvC"/>
                             <constraint firstItem="pwd-tK-6yh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="baV-ct-etz"/>
                             <constraint firstItem="pwd-tK-6yh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ikp-VU-a3P"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MfU-A4-ciA" secondAttribute="trailing" constant="20" id="n4d-aF-zAo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2oc-St-9Jb"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="2oc-St-9Jb"/>
-                                <exclude reference="IZW-Pc-fvC"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact-widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="2oc-St-9Jb"/>
-                                <exclude reference="IZW-Pc-fvC"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="pwd-tK-6yh" id="f9B-Nb-nbm"/>
-                        <outlet property="overviewMapView" destination="MfU-A4-ciA" id="hGG-Xh-BWC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

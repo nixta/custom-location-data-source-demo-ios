@@ -1,7 +1,9 @@
 # custom-location-data-source-demo-ios
 A custom Location Data Source demo for the ArcGIS Runtime SDK for iOS, to track the International Space Station location in realtime.
 
-This demo was built to accompany [this Esri Community blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/02/creating-a-custom-location-data-source).
+This demo was built to accompany [this blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/08/runtime-location-part-1-the-blue-dot).
+
+![Image](app-image.jpg)
 
 ## Requirements
 * [ArcGIS Runtime SDK for iOS](https://developers.arcgis.com/en/ios/) 100.4 (or higher)
@@ -13,7 +15,7 @@ Open the project in Xcode and run.
 
 ## Additional Resources
 
-* Creating a Custom Location Data Source [blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/02/creating-a-custom-location-data-source).
+* Location and the Runtime [blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/08/runtime-location-part-1-the-blue-dot).
 * New to ArcGIS Runtime? Explore the documentation : [Guide](https://developers.arcgis.com/ios) | [API Reference](https://developers.arcgis.com/ios/latest/api-reference/), and check out the [Samples](https://github.com/Esri/arcgis-runtime-samples-ios)
 * Got a question? Ask the community on our [forum](http://geonet.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios)
 * The superb ISS Icon was provided under Creative Commons 4.0 by https://goodstuffnononsense.com (see [iconarchive.com](http://www.iconarchive.com/show/free-space-icons-by-goodstuff-no-nonsense/international-space-station-icon.html))
