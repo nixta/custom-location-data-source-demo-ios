@@ -29,6 +29,8 @@ class ISSTrackerViewController: UIViewController {
             // Add some overlays for displaying the ISS track and an estimate of what's visible.
             mapView.graphicsOverlays.add(issTrackOverlay)
             mapView.graphicsOverlays.add(issVisibilityOverlay)
+            
+            mapView.interactionOptions.isMagnifierEnabled = false
 
             configureLatLonGrid()
         }
@@ -127,15 +129,15 @@ class ISSTrackerViewController: UIViewController {
         mapView.locationDisplay.locationChangedHandler = { [weak self] newLocation in
             guard let self = self, let newPosition = newLocation.position else { return }
             
-            var leaveGap = false
+            var shouldLeaveGap = false
             if let lastTimestamp = self.lastLocation?.timestamp, newLocation.timestamp.timeIntervalSince(lastTimestamp) > 10 {
                 // We hadn't had any updates for a little while, let's start a new polyline part for the track.
                 // Could be because the app was backgrounded, or because the API stopped responding.
-                leaveGap = true
+                shouldLeaveGap = true
             }
             
             // Update the map display to reflect the latest ISS position.
-            self.updateISSTrack(with: newPosition, leaveGap: leaveGap)
+            self.updateISSTrack(with: newPosition, leaveGap: shouldLeaveGap)
             self.updateISSEstimatedViewshed(for: newPosition)
             self.updateISSOverviewMap(for: newPosition)
             

@@ -51,8 +51,13 @@ internal struct Position: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        latitude = Double(try container.decode(String.self, forKey: .latitude))!
-        longitude = Double(try container.decode(String.self, forKey: .longitude))!
+        guard let latitude = Double(try container.decode(String.self, forKey: .latitude)),
+            let longitude = Double(try container.decode(String.self, forKey: .longitude)) else {
+                throw DecodingError.typeMismatch(String.self, DecodingError.Context(codingPath: [CodingKeys.longitude, CodingKeys.latitude],
+                                                                                    debugDescription: "Expected Strings representing Doubles for lat/lon"))
+        }
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
     var point: AGSPoint {

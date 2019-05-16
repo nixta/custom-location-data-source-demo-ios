@@ -31,11 +31,20 @@ class ISSLocationDataSource: AGSLocationDataSource {
     private var previousLocation: AGSLocation?
     
     // MARK: - FROM AGSLocationDisplay: start AGSLocationDataSource.
+    //
+    // This is called by the Map View's Location Display when the app has requested that location tracking
+    // is started. This function is where you would initialize or connect any special hardware, for example.
+    // Once that initialization is complete and you are ready to start providing location updates, this
+    // function must call didStartOrFailWithError(nil) to signify that Runtime should expect locations.
+    // If the initialization failed, tell Runtime how it failed by passing an NSError into didStartOrFailWithError().
     override func doStart() {
         // Clear any error tracking. `errorCountForFailure` errors in a row will cause API requests to stop being sent.
         errors.removeAll()
 
         // MARK: TO AGSLocationDisplay: data source started OK.
+        //
+        // A Location Data Source implementation must call this at some point in doStart() to signify that
+        // the source started OK (pass in nil), or failed to start (pass in an NSError).
         didStartOrFailWithError(nil)
 
         // Start the locations feed
@@ -43,9 +52,16 @@ class ISSLocationDataSource: AGSLocationDataSource {
     }
     
     // MARK: FROM AGSLocationDisplay: stop AGSLocationDataSource.
+    //
+    // This is called by the Map View's Location Display when the app has requested that location tracking
+    // is stopped. This function is where you would shut down or disconnect any special hardware, for example.
     override func doStop() {
         stopRetrievingISSLocationsFromAPI()
         
+        // MARK: TO AGSLocationDisplay: data source stopped OK.
+        //
+        // A Location Data Source implementation must call this at some point in doStop() to signify that
+        // the source has been stopped.
         didStop()
     }
 
@@ -143,10 +159,10 @@ class ISSLocationDataSource: AGSLocationDataSource {
             // Decode the JSON into an ISSLocation
             switch Result(catching: { try JSONDecoder().decode(ISSLocation.self, from: data) }) {
 
-            case .success(let issLocationFromAPI):
+            case .success(let issLocation):
 
                 /// 2. Now turn the ISSLocation into an AGSLocation to be used by an AGSLocationDisplay.
-                let location = issLocationFromAPI.agsLocation(consideringPrevious: self.previousLocation)
+                let location = issLocation.toAGSLocation(relativeTo: self.previousLocation)
                 
                 completion(location)
                 
