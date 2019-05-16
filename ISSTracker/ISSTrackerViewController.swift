@@ -36,6 +36,10 @@ class ISSTrackerViewController: UIViewController {
         mapView.interactionOptions.isPanEnabled = false
         
         
+        // Hide the magnifier, usually displayed if you tap and hold on the map view.
+        mapView.interactionOptions.allowMagnifierToPan = false
+        
+        
         // Use our custom ISS Tracking Location Data Source.
         mapView.locationDisplay.dataSource = ISSLocationDataSource()
         

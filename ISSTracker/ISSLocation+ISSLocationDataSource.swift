@@ -17,8 +17,16 @@
 import Foundation
 import ArcGIS
 
-extension ISSLocation {
-    func agsLocation(consideringPrevious previous: AGSLocation?) -> AGSLocation {
+extension ISSLocation {    
+    /// Return an `AGSLocation` representing the `ISSLocation`.
+    ///
+    /// - Parameter previous: The previous location of the ISS as an `AGSLocation`, used to calculate the
+    /// velocity and heading for the this `ISSLocation`. If not provided, the heading will be 0 and velocity
+    /// will be estimated as 7666m/s. The `lastKnown` property of the returned `AGSLocation` will be `true` if
+    /// this is `nil`.
+    ///
+    /// - Returns: An AGSLocation.
+    func toAGSLocation(relativeTo previous: AGSLocation?) -> AGSLocation {
         // Set the altitude in meters (guesstimated from https://www.heavens-above.com/IssHeight.aspx).
         let positionWithZ = AGSGeometryEngine.geometry(bySettingZ: 407000, in: position) as! AGSPoint
         
