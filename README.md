@@ -1,9 +1,15 @@
-# custom-location-data-source-demo-ios
+# Overview
 A custom Location Data Source demo for the ArcGIS Runtime SDK for iOS, to track the International Space Station location in realtime.
 
 This demo was built to accompany [this blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/08/runtime-location-part-1-the-blue-dot).
 
 ![Image](app-image.jpg)
+
+## Features
+
+* Show the current ISS location.
+* Demonstrate creating a custom Location Data Source for use with the ArcGIS Runtime SDK for iOS.
+* Customize the Current Location display.
 
 ## Requirements
 
