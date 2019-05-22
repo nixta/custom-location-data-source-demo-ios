@@ -1,7 +1,7 @@
 # Overview
 A custom Location Data Source demo for the ArcGIS Runtime SDK for iOS, to track the International Space Station location in realtime.
 
-This demo was built to accompany [this blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/08/runtime-location-part-1-the-blue-dot).
+This demo was built to accompany [this blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/08/runtime-location-part-1-the-blue-dot) (as well as [part 2](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/09/runtime-location-part-2-location-data-sources) and [part 3](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/09/runtime-location-part-3-a-custom-data-source) of the blog series).
 
 ![Image](app-image.jpg)
 
@@ -12,7 +12,6 @@ This demo was built to accompany [this blog post](https://community.esri.com/com
 * Customize the Current Location display.
 
 ## Requirements
-
 * [ArcGIS Runtime SDK for iOS](https://developers.arcgis.com/en/ios/) 100.4 (or higher)
 * Xcode 10.1 (or higher)
 
@@ -25,10 +24,8 @@ Open the project in Xcode and run.
 * Location and the Runtime [blog post](https://community.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios/blog/2019/05/08/runtime-location-part-1-the-blue-dot).
 * New to ArcGIS Runtime? Explore the documentation : [Guide](https://developers.arcgis.com/ios) | [API Reference](https://developers.arcgis.com/ios/latest/api-reference/), and check out the [Samples](https://github.com/Esri/arcgis-runtime-samples-ios)
 * Got a question? Ask the community on our [forum](http://geonet.esri.com/community/developers/native-app-developers/arcgis-runtime-sdk-for-ios)
-
-## Credits
-
 * The superb ISS Icon was provided under Creative Commons 4.0 by https://goodstuffnononsense.com (see [iconarchive.com](http://www.iconarchive.com/show/free-space-icons-by-goodstuff-no-nonsense/international-space-station-icon.html))
+
 
 ## Issues
 
