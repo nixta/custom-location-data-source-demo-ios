@@ -5,6 +5,8 @@ This demo was built to accompany [this blog post](https://community.esri.com/com
 
 ![Image](app-image.jpg)
 
+To see a slightly simpler version of this demo which focuses on the ArcGIS Runtime components, see [this branch](https://github.com/nixta/custom-location-data-source-demo-ios/tree/simplified)
+
 ## Features
 
 * Show the current ISS location.
